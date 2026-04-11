@@ -37,6 +37,12 @@ pip install httpx
 py -m pip install httpx
 ```
 
+或者直接安装仓库依赖文件：
+
+```bash
+pip install -r requirements.txt
+```
+
 ## 使用方法
 
 在项目目录中运行：
@@ -50,6 +56,16 @@ py build_ip_address/main.py
 ```text
 cn_ipv4_script.rsc
 ```
+
+## GitHub Actions
+
+仓库已包含 GitHub Actions 工作流，可用于自动生成脚本。
+
+- 支持手动触发 `workflow_dispatch`
+- 当 `main` 分支上的脚本、工作流或依赖文件发生变化时自动运行
+- 运行完成后会上传 `cn_ipv4_script.rsc` 作为 Actions Artifact
+
+你可以在 GitHub 仓库的 `Actions` 页面下载生成结果。
 
 ## 生成内容示例
 

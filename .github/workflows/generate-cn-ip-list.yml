@@ -1,0 +1,37 @@
+name: Generate CN IP List
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "build_ip_address/**"
+      - ".github/workflows/generate-cn-ip-list.yml"
+      - "requirements.txt"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate MikroTik script
+        run: python build_ip_address/main.py
+
+      - name: Upload generated script
+        uses: actions/upload-artifact@v4
+        with:
+          name: cn-ipv4-script
+          path: cn_ipv4_script.rsc
+          if-no-files-found: error
