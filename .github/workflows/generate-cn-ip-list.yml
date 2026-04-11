@@ -2,13 +2,8 @@ name: Generate CN IP List
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "build_ip_address/**"
-      - ".github/workflows/generate-cn-ip-list.yml"
-      - "requirements.txt"
+  schedule:
+    - cron: "0 20 * * *"
 
 permissions:
   contents: write

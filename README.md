@@ -62,7 +62,8 @@ cn_ipv4_script.rsc
 仓库已包含 GitHub Actions 工作流，可用于自动生成脚本。
 
 - 支持手动触发 `workflow_dispatch`
-- 当 `main` 分支上的脚本、工作流或依赖文件发生变化时自动运行
+- 支持每天北京时间 `04:00` 自动运行一次
+- GitHub Actions 的定时任务使用 `UTC`，当前配置实际为 `20:00 UTC`，即次日 `04:00 Asia/Shanghai`
 - 每次运行前会删除旧的 `latest` Release
 - 运行完成后会重新发布最新的 `cn_ipv4_script.rsc` 到 `latest` Release
 
