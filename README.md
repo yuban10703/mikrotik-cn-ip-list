@@ -63,9 +63,10 @@ cn_ipv4_script.rsc
 
 - 支持手动触发 `workflow_dispatch`
 - 当 `main` 分支上的脚本、工作流或依赖文件发生变化时自动运行
-- 运行完成后会上传 `cn_ipv4_script.rsc` 作为 Actions Artifact
+- 每次运行前会删除旧的 `latest` Release
+- 运行完成后会重新发布最新的 `cn_ipv4_script.rsc` 到 `latest` Release
 
-你可以在 GitHub 仓库的 `Actions` 页面下载生成结果。
+你可以在 GitHub 仓库的 `Releases` 页面直接下载生成结果。
 
 ## 生成内容示例
 

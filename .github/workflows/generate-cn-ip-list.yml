@@ -10,6 +10,9 @@ on:
       - ".github/workflows/generate-cn-ip-list.yml"
       - "requirements.txt"
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,9 +32,20 @@ jobs:
       - name: Generate MikroTik script
         run: python build_ip_address/main.py
 
-      - name: Upload generated script
-        uses: actions/upload-artifact@v4
+      - name: Delete previous release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --yes --cleanup-tag || true
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
         with:
-          name: cn-ipv4-script
-          path: cn_ipv4_script.rsc
-          if-no-files-found: error
+          tag_name: latest
+          name: Latest CN IPv4 Script
+          body: |
+            Auto-generated MikroTik CN IPv4 address list.
+
+            Source workflow: `${{ github.workflow }}`
+            Commit: `${{ github.sha }}`
+          files: cn_ipv4_script.rsc
