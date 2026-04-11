@@ -57,6 +57,35 @@ py build_ip_address/main.py
 cn_ipv4_script.rsc
 ```
 
+## RouterOS 更新脚本
+
+可以直接在 RouterOS 里使用下面这段脚本，从 CDN 下载最新的 `cn_ipv4_script.rsc`，保存到指定目录后立即执行：
+
+```routeros
+:local releaseUrl "https://cdn.jsdelivr.net/gh/yuban10703/mikrotik-cn-ip-list@release/cn_ipv4_script.rsc"
+:local targetDir "flash"
+:local fileName "cn_ipv4_script.rsc"
+:local targetPath ($targetDir . "/" . $fileName)
+
+:log info ("Downloading CN IPv4 script from " . $releaseUrl)
+/tool fetch url=$releaseUrl dst-path=$targetPath check-certificate=yes
+:delay 2s
+
+:if ([:len [/file find where name=$targetPath]] = 0) do={
+    :error ("Downloaded file not found: " . $targetPath)
+}
+
+:log info ("Importing " . $targetPath)
+/import file-name=$targetPath
+:log info ("Finished importing " . $targetPath)
+```
+
+说明：
+
+- CDN 地址指向仓库专用发布分支 `release` 中的 `cn_ipv4_script.rsc`
+- 默认保存目录是 `flash`
+- 如果你的设备要保存到别的位置，修改 `:local targetDir "flash"` 即可
+
 ## GitHub Actions
 
 仓库已包含 GitHub Actions 工作流，可用于自动生成脚本。
@@ -64,6 +93,7 @@ cn_ipv4_script.rsc
 - 支持手动触发 `workflow_dispatch`
 - 支持每天北京时间 `04:00` 自动运行一次
 - GitHub Actions 的定时任务使用 `UTC`，当前配置实际为 `20:00 UTC`，即次日 `04:00 Asia/Shanghai`
+- 每次运行后会把 `cn_ipv4_script.rsc` 提交到专用发布分支 `release`
 - 每次运行前会删除旧的 `latest` Release
 - 运行完成后会重新发布最新的 `cn_ipv4_script.rsc` 到 `latest` Release
 

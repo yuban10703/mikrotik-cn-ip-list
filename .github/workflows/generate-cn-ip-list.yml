@@ -27,6 +27,29 @@ jobs:
       - name: Generate MikroTik script
         run: python build_ip_address/main.py
 
+      - name: Publish script to release branch
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp cn_ipv4_script.rsc /tmp/cn_ipv4_script.rsc
+          git fetch origin release || true
+          if git show-ref --verify --quiet refs/remotes/origin/release; then
+            git worktree add /tmp/release-branch origin/release
+          else
+            git worktree add --detach /tmp/release-branch
+            cd /tmp/release-branch
+            git switch --orphan release
+            cd "$GITHUB_WORKSPACE"
+          fi
+          cd /tmp/release-branch
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp /tmp/cn_ipv4_script.rsc ./cn_ipv4_script.rsc
+          git add cn_ipv4_script.rsc
+          git commit -m "Update cn_ipv4_script.rsc" || echo "No changes to commit"
+          git push origin HEAD:release --force
+
       - name: Delete previous release
         env:
           GH_TOKEN: ${{ github.token }}
