@@ -93,7 +93,8 @@ cn_ipv4_script.rsc
 - 支持手动触发 `workflow_dispatch`
 - 支持每天北京时间 `04:00` 自动运行一次
 - GitHub Actions 的定时任务使用 `UTC`，当前配置实际为 `20:00 UTC`，即次日 `04:00 Asia/Shanghai`
-- 每次运行后会把 `cn_ipv4_script.rsc` 提交到专用发布分支 `release`
+- 每次运行后会把 `cn_ipv4_script.rsc` 和 `last-run.txt` 提交到专用发布分支 `release`
+- `last-run.txt` 会记录最近一次工作流运行时间、运行链接和来源提交，方便确认任务是否正常执行
 - 每次运行前会删除旧的 `latest` Release
 - 运行完成后会重新发布最新的 `cn_ipv4_script.rsc` 到 `latest` Release
 

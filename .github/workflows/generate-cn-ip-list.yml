@@ -46,8 +46,14 @@ jobs:
           cd /tmp/release-branch
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp /tmp/cn_ipv4_script.rsc ./cn_ipv4_script.rsc
-          git add cn_ipv4_script.rsc
-          git commit -m "Update cn_ipv4_script.rsc" || echo "No changes to commit"
+          {
+            echo "Updated at: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+            echo "Workflow: $GITHUB_WORKFLOW"
+            echo "Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "Source commit: $GITHUB_SHA"
+          } > last-run.txt
+          git add cn_ipv4_script.rsc last-run.txt
+          git commit -m "Update generated release files"
           git push origin HEAD:release --force
 
       - name: Delete previous release
