@@ -7161,6 +7161,7 @@
 :do { add address=71.137.0.0/18 list=CN } on-error={}
 :do { add address=72.163.240.0/23 list=CN } on-error={}
 :do { add address=72.163.248.0/22 list=CN } on-error={}
+:do { add address=78.105.182.0/23 list=CN } on-error={}
 :do { add address=8.128.0.0/10 list=CN } on-error={}
 :do { add address=81.173.18.0/23 list=CN } on-error={}
 :do { add address=81.173.20.0/22 list=CN } on-error={}
