@@ -1996,6 +1996,7 @@
 :do { add address=103.97.112.0/21 list=CN } on-error={}
 :do { add address=103.97.144.0/21 list=CN } on-error={}
 :do { add address=103.97.16.0/20 list=CN } on-error={}
+:do { add address=103.97.175.0/24 list=CN } on-error={}
 :do { add address=103.97.188.0/22 list=CN } on-error={}
 :do { add address=103.97.192.0/22 list=CN } on-error={}
 :do { add address=103.97.40.0/22 list=CN } on-error={}
