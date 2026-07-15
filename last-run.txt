@@ -1,4 +1,4 @@
-Updated at: 2026-07-14T20:53:49Z
+Updated at: 2026-07-15T20:53:20Z
 Workflow: Generate CN IP List
-Run: https://github.com/yuban10703/mikrotik-cn-ip-list/actions/runs/29367475990
+Run: https://github.com/yuban10703/mikrotik-cn-ip-list/actions/runs/29449963755
 Source commit: 771932726c537d13456c48e78c743f951854708b
