@@ -1962,7 +1962,7 @@
 :do { add address=103.99.220.0/22 list=CN } on-error={}
 :do { add address=103.99.232.0/21 list=CN } on-error={}
 :do { add address=103.99.53.0/24 list=CN } on-error={}
-:do { add address=103.99.54.0/23 list=CN } on-error={}
+:do { add address=103.99.55.0/24 list=CN } on-error={}
 :do { add address=103.99.56.0/22 list=CN } on-error={}
 :do { add address=103.99.62.0/24 list=CN } on-error={}
 :do { add address=104.192.108.0/23 list=CN } on-error={}
